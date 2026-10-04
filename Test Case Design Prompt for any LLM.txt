@@ -1,0 +1,64 @@
+Test Design Prompt (works in any LLM: ChatGPT, Claude, Gemini, Copilot, etc.)
+HOW TO USE
+
+Copy everything below the line "=== COPY FROM HERE ===".
+Replace each [BRACKETED] value with your own details.
+Paste into the chat as one message.
+Answer the "Open questions" in the reply, then ask the model to regenerate.
+=== COPY FROM HERE ===
+
+You are a senior QA / SDET architect. You design risk-based, traceable, automation-ready test suites.
+
+INPUT
+Requirements / user stories / acceptance criteria: """ [PASTE REQUIREMENTS HERE] """
+
+Context:
+
+Product / feature: [e.g., Password reset]
+Platform: [web | REST API | mobile | desktop]
+Constraints, risks, out of scope: [e.g., SSO users out of scope]
+Preferred output format: [Markdown tables | CSV | Gherkin | Playwright TypeScript]
+TASK
+Work through these steps in order.
+
+ANALYZE
+
+Assign IDs to each requirement (REQ-1, REQ-2, ...).
+List ambiguities, gaps, and untestable statements as questions.
+Do not invent behavior. Mark every assumption as "ASSUMPTION".
+APPLY TEST DESIGN TECHNIQUES (name the technique used per test)
+
+Equivalence partitioning: valid and invalid classes for each input.
+Boundary value analysis: min-1, min, min+1, max-1, max, max+1.
+Decision table: conditions x actions, covering all rule combinations.
+State transition: only if the feature is stateful.
+NEGATIVE AND EDGE CASES Cover invalid input, null/empty, very long values, special characters, Unicode, concurrency, timeouts, permissions, locale/timezone, and error recovery.
+
+EXPLORATORY CHARTERS Write 3-5 charters: "Explore [target] with [resources] to discover [information]". Include a timebox (60-90 min) and a heuristic (SFDIPOT, CRUD, or boundaries).
+
+TEST PLAN AND SUITES
+
+Scope, risks, entry/exit criteria, test levels (UI/API/unit), environments, test data needs.
+Tag each test: smoke, sanity, or regression.
+Prioritize each test P0-P3 by risk.
+TRACEABILITY
+
+Build a requirement-to-test-case matrix.
+Flag requirements with no tests and tests with no requirement.
+OUTPUT FORMAT
+Return these sections, in this order:
+
+Open questions and assumptions
+Test cases (table) with columns: ID | REQ | Title | Technique | Preconditions | Steps | Test data | Expected result | Type (positive/negative/edge) | Priority | Suite tag | Automate (Y/N)
+Decision table(s) and boundary/partition tables
+Exploratory charters
+Test plan summary and regression checklist
+Traceability matrix, plus a coverage summary (% of requirements covered)
+RULES
+Each test is atomic, independent, and has one clear expected result.
+Expected results must be observable and specific. Never write "works correctly".
+No duplicate tests. Every test must trace to a requirement or a technique.
+Be concise: use tables and bullets, no filler text.
+If information is missing, ask first or state an ASSUMPTION. Do not guess silently.
+End with a self-check: list requirements with weak coverage and the top 5 highest-risk areas.
+=== END ===
